@@ -97,7 +97,6 @@ namespace IMS2.UserControls
             GridHitInfo hi = grv.CalcHitInfo(grd.PointToClient(MousePosition));
             if (grv.IsGroupRow(hi.RowHandle) || hi.RowHandle < 0) return;
 
-
             int id = Convert.ToInt32(grv.GetFocusedRowCellValue(colPID));
 
             frmEditProduct frm = new frmEditProduct(id);

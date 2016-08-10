@@ -41,6 +41,8 @@
             this.nProducts = new DevExpress.XtraNavBar.NavBarItem();
             this.nSuppliers = new DevExpress.XtraNavBar.NavBarItem();
             this.nCustomers = new DevExpress.XtraNavBar.NavBarItem();
+            this.ribbonPageGroup3 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.bSell = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.MainRibbon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.spl)).BeginInit();
             this.spl.SuspendLayout();
@@ -53,14 +55,15 @@
             this.MainRibbon.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.MainRibbon.ExpandCollapseItem,
             this.bPrd,
-            this.bCat});
+            this.bCat,
+            this.bSell});
             this.MainRibbon.Location = new System.Drawing.Point(0, 0);
-            this.MainRibbon.MaxItemId = 3;
+            this.MainRibbon.MaxItemId = 4;
             this.MainRibbon.Name = "MainRibbon";
             this.MainRibbon.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPage1});
             this.MainRibbon.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.Office2010;
-            this.MainRibbon.Size = new System.Drawing.Size(758, 143);
+            this.MainRibbon.Size = new System.Drawing.Size(1035, 143);
             // 
             // bPrd
             // 
@@ -82,6 +85,7 @@
             // ribbonPage1
             // 
             this.ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
+            this.ribbonPageGroup3,
             this.ribbonPageGroup1,
             this.ribbonPageGroup2});
             this.ribbonPage1.Name = "ribbonPage1";
@@ -109,7 +113,7 @@
             this.spl.Panel1.Controls.Add(this.navBarControl1);
             this.spl.Panel1.Text = "Panel1";
             this.spl.Panel2.Text = "Panel2";
-            this.spl.Size = new System.Drawing.Size(758, 387);
+            this.spl.Size = new System.Drawing.Size(1035, 543);
             this.spl.SplitterPosition = 188;
             this.spl.TabIndex = 3;
             this.spl.Text = "splitContainerControl1";
@@ -126,8 +130,9 @@
             this.nCustomers});
             this.navBarControl1.Location = new System.Drawing.Point(0, 0);
             this.navBarControl1.Name = "navBarControl1";
+            this.navBarControl1.OptionsNavPane.ExpandedWidth = 188;
             this.navBarControl1.PaintStyleKind = DevExpress.XtraNavBar.NavBarViewKind.NavigationPane;
-            this.navBarControl1.Size = new System.Drawing.Size(188, 387);
+            this.navBarControl1.Size = new System.Drawing.Size(188, 543);
             this.navBarControl1.TabIndex = 0;
             this.navBarControl1.Text = "navBarControl1";
             // 
@@ -151,18 +156,36 @@
             // 
             this.nSuppliers.Caption = "Suppliers";
             this.nSuppliers.Name = "nSuppliers";
+            this.nSuppliers.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.nSuppliers_LinkClicked);
             // 
             // nCustomers
             // 
             this.nCustomers.Caption = "Customers";
             this.nCustomers.Name = "nCustomers";
+            this.nCustomers.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.nCustomers_LinkClicked);
+            // 
+            // ribbonPageGroup3
+            // 
+            this.ribbonPageGroup3.ItemLinks.Add(this.bSell);
+            this.ribbonPageGroup3.Name = "ribbonPageGroup3";
+            this.ribbonPageGroup3.ShowCaptionButton = false;
+            this.ribbonPageGroup3.Text = "Transaction";
+            // 
+            // bSell
+            // 
+            this.bSell.Caption = "Sell";
+            this.bSell.Glyph = ((System.Drawing.Image)(resources.GetObject("bSell.Glyph")));
+            this.bSell.Id = 3;
+            this.bSell.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("bSell.LargeGlyph")));
+            this.bSell.Name = "bSell";
+            this.bSell.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.bSell_ItemClick);
             // 
             // MainForm
             // 
             this.AllowFormGlass = DevExpress.Utils.DefaultBoolean.False;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(758, 530);
+            this.ClientSize = new System.Drawing.Size(1035, 686);
             this.Controls.Add(this.spl);
             this.Controls.Add(this.MainRibbon);
             this.Name = "MainForm";
@@ -191,6 +214,8 @@
         private DevExpress.XtraNavBar.NavBarItem nProducts;
         private DevExpress.XtraNavBar.NavBarItem nSuppliers;
         private DevExpress.XtraNavBar.NavBarItem nCustomers;
+        private DevExpress.XtraBars.BarButtonItem bSell;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup3;
     }
 }
 

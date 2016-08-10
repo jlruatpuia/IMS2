@@ -41,6 +41,7 @@
             this.grv = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colPID = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCAT = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colCMP = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colSCT = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colPNM = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colBVL = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -150,6 +151,7 @@
             this.grv.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colPID,
             this.colCAT,
+            this.colCMP,
             this.colSCT,
             this.colPNM,
             this.colBVL,
@@ -197,6 +199,17 @@
             this.colCAT.Visible = true;
             this.colCAT.VisibleIndex = 0;
             // 
+            // colCMP
+            // 
+            this.colCMP.Caption = "Company";
+            this.colCMP.FieldName = "Company";
+            this.colCMP.Name = "colCMP";
+            this.colCMP.OptionsColumn.AllowEdit = false;
+            this.colCMP.OptionsColumn.AllowFocus = false;
+            this.colCMP.OptionsColumn.ReadOnly = true;
+            this.colCMP.Visible = true;
+            this.colCMP.VisibleIndex = 1;
+            // 
             // colSCT
             // 
             this.colSCT.Caption = "Sub-Category";
@@ -217,7 +230,7 @@
             this.colPNM.OptionsColumn.AllowFocus = false;
             this.colPNM.OptionsColumn.ReadOnly = true;
             this.colPNM.Visible = true;
-            this.colPNM.VisibleIndex = 1;
+            this.colPNM.VisibleIndex = 2;
             // 
             // colBVL
             // 
@@ -230,7 +243,7 @@
             this.colBVL.OptionsColumn.AllowFocus = false;
             this.colBVL.OptionsColumn.ReadOnly = true;
             this.colBVL.Visible = true;
-            this.colBVL.VisibleIndex = 2;
+            this.colBVL.VisibleIndex = 3;
             // 
             // colSVL
             // 
@@ -243,7 +256,7 @@
             this.colSVL.OptionsColumn.AllowFocus = false;
             this.colSVL.OptionsColumn.ReadOnly = true;
             this.colSVL.Visible = true;
-            this.colSVL.VisibleIndex = 3;
+            this.colSVL.VisibleIndex = 4;
             // 
             // colMFG
             // 
@@ -256,7 +269,7 @@
             this.colMFG.OptionsColumn.AllowFocus = false;
             this.colMFG.OptionsColumn.ReadOnly = true;
             this.colMFG.Visible = true;
-            this.colMFG.VisibleIndex = 4;
+            this.colMFG.VisibleIndex = 5;
             // 
             // colEXP
             // 
@@ -269,7 +282,7 @@
             this.colEXP.OptionsColumn.AllowFocus = false;
             this.colEXP.OptionsColumn.ReadOnly = true;
             this.colEXP.Visible = true;
-            this.colEXP.VisibleIndex = 5;
+            this.colEXP.VisibleIndex = 6;
             // 
             // colPKG
             // 
@@ -280,7 +293,7 @@
             this.colPKG.OptionsColumn.AllowFocus = false;
             this.colPKG.OptionsColumn.ReadOnly = true;
             this.colPKG.Visible = true;
-            this.colPKG.VisibleIndex = 6;
+            this.colPKG.VisibleIndex = 7;
             // 
             // colQTY
             // 
@@ -291,7 +304,7 @@
             this.colQTY.OptionsColumn.AllowFocus = false;
             this.colQTY.OptionsColumn.ReadOnly = true;
             this.colQTY.Visible = true;
-            this.colQTY.VisibleIndex = 7;
+            this.colQTY.VisibleIndex = 8;
             // 
             // colTBV
             // 
@@ -304,7 +317,7 @@
             this.colTBV.OptionsColumn.AllowFocus = false;
             this.colTBV.OptionsColumn.ReadOnly = true;
             this.colTBV.Visible = true;
-            this.colTBV.VisibleIndex = 8;
+            this.colTBV.VisibleIndex = 9;
             // 
             // colTSV
             // 
@@ -317,7 +330,7 @@
             this.colTSV.OptionsColumn.AllowFocus = false;
             this.colTSV.OptionsColumn.ReadOnly = true;
             this.colTSV.Visible = true;
-            this.colTSV.VisibleIndex = 9;
+            this.colTSV.VisibleIndex = 10;
             // 
             // colBCD
             // 
@@ -328,7 +341,7 @@
             this.colBCD.OptionsColumn.AllowFocus = false;
             this.colBCD.OptionsColumn.ReadOnly = true;
             this.colBCD.Visible = true;
-            this.colBCD.VisibleIndex = 10;
+            this.colBCD.VisibleIndex = 11;
             // 
             // ucProducts
             // 
@@ -370,5 +383,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn colTSV;
         private DevExpress.XtraBars.BarCheckItem bExpand;
         private DevExpress.XtraGrid.Columns.GridColumn colBCD;
+        private DevExpress.XtraGrid.Columns.GridColumn colCMP;
     }
 }

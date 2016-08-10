@@ -44,5 +44,24 @@ namespace IMS2
             MainRibbon.MergeRibbon(uc.ribbonControl);
             MainRibbon.SelectedPage = MainRibbon.MergedRibbon.SelectedPage;
         }
+
+        private void nSuppliers_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+
+        }
+
+        private void nCustomers_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            ucCustomers uc = new ucCustomers() { Dock = DockStyle.Fill };
+            LoadControl(uc);
+            MainRibbon.MergeRibbon(uc.ribbonControl1);
+            MainRibbon.SelectedPage = MainRibbon.MergedRibbon.SelectedPage;
+        }
+
+        private void bSell_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            frmSellProduct frm = new frmSellProduct();
+            frm.ShowDialog();
+        }
     }
 }

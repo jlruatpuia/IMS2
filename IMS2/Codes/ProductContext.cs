@@ -1,26 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Configuration;
 using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MySql.Data.MySqlClient;
 
 namespace IMS2.Codes
 {
-    public class ProductContext : DbContext
+    public class ProductContext 
     {
         MySqlConnection cm = new MySqlConnection(ConfigurationManager.ConnectionStrings["cs"].ConnectionString);
-        public DbSet<Category> Categories { get; set; }
-        public DbSet<Product> Products { get; set; }
-
-        public ProductContext() : base("name = cs")
-        {
-
-        }
-
         public ServerToClient GetProducts()
         {
             ServerToClient sc = new ServerToClient();
@@ -99,18 +86,25 @@ namespace IMS2.Codes
             {
                 cm.Open();
                 MySqlDataReader rd = cmd.ExecuteReader();
-                rd.Read();
-                p.Company = rd[1].ToString();
-                p.ProductName = rd[2].ToString();
-                p.BarCode = rd[3].ToString();
-                p.BuyingValue = Convert.ToDouble(rd[4]);
-                p.SellingValue = Convert.ToDouble(rd[5]);
-                p.MfgDate = rd[6].ToString();
-                p.ExpDate = rd[7].ToString();
-                p.Category = Convert.ToInt32(rd[8]);
-                p.SubCategory = rd[9].ToString();
-                p.PackageSize = rd[10].ToString();
-                p.Quantity = Convert.ToInt32(rd[11]);
+                if (rd.HasRows)
+                {
+                    rd.Read();
+                    p.Company = rd[1].ToString();
+                    p.ProductName = rd[2].ToString();
+                    p.BarCode = rd[3].ToString();
+                    p.BuyingValue = Convert.ToDouble(rd[4]);
+                    p.SellingValue = Convert.ToDouble(rd[5]);
+                    p.MfgDate = rd[6].ToString();
+                    p.ExpDate = rd[7].ToString();
+                    p.Category = Convert.ToInt32(rd[8]);
+                    p.SubCategory = rd[9].ToString();
+                    p.PackageSize = rd[10].ToString();
+                    p.Quantity = Convert.ToInt32(rd[11]);
+                }
+                else
+                {
+                    p.Message = "Product not found";
+                }
             }
             catch {; }
             finally { cm.Close(); }
