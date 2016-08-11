@@ -92,6 +92,12 @@
     <Compile Include="Forms\frmEditProduct.Designer.cs">
       <DependentUpon>frmEditProduct.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\frmQuickSale.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmQuickSale.Designer.cs">
+      <DependentUpon>frmQuickSale.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\frmSellProduct.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -129,6 +135,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmEditProduct.resx">
       <DependentUpon>frmEditProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmQuickSale.resx">
+      <DependentUpon>frmQuickSale.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmSellProduct.resx">
       <DependentUpon>frmSellProduct.cs</DependentUpon>

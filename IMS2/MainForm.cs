@@ -63,5 +63,11 @@ namespace IMS2
             frmSellProduct frm = new frmSellProduct();
             frm.ShowDialog();
         }
+
+        private void bQSell_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            frmQuickSale frm = new frmQuickSale();
+            frm.ShowDialog();
+        }
     }
 }

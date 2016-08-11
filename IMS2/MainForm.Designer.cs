@@ -32,7 +32,9 @@
             this.MainRibbon = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.bPrd = new DevExpress.XtraBars.BarButtonItem();
             this.bCat = new DevExpress.XtraBars.BarButtonItem();
+            this.bSell = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
+            this.ribbonPageGroup3 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.spl = new DevExpress.XtraEditors.SplitContainerControl();
@@ -41,8 +43,7 @@
             this.nProducts = new DevExpress.XtraNavBar.NavBarItem();
             this.nSuppliers = new DevExpress.XtraNavBar.NavBarItem();
             this.nCustomers = new DevExpress.XtraNavBar.NavBarItem();
-            this.ribbonPageGroup3 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.bSell = new DevExpress.XtraBars.BarButtonItem();
+            this.bQSell = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.MainRibbon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.spl)).BeginInit();
             this.spl.SuspendLayout();
@@ -56,9 +57,10 @@
             this.MainRibbon.ExpandCollapseItem,
             this.bPrd,
             this.bCat,
-            this.bSell});
+            this.bSell,
+            this.bQSell});
             this.MainRibbon.Location = new System.Drawing.Point(0, 0);
-            this.MainRibbon.MaxItemId = 4;
+            this.MainRibbon.MaxItemId = 5;
             this.MainRibbon.Name = "MainRibbon";
             this.MainRibbon.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPage1});
@@ -82,6 +84,15 @@
             this.bCat.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("bCat.LargeGlyph")));
             this.bCat.Name = "bCat";
             // 
+            // bSell
+            // 
+            this.bSell.Caption = "Sell";
+            this.bSell.Glyph = ((System.Drawing.Image)(resources.GetObject("bSell.Glyph")));
+            this.bSell.Id = 3;
+            this.bSell.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("bSell.LargeGlyph")));
+            this.bSell.Name = "bSell";
+            this.bSell.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.bSell_ItemClick);
+            // 
             // ribbonPage1
             // 
             this.ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -90,6 +101,14 @@
             this.ribbonPageGroup2});
             this.ribbonPage1.Name = "ribbonPage1";
             this.ribbonPage1.Text = "Home";
+            // 
+            // ribbonPageGroup3
+            // 
+            this.ribbonPageGroup3.ItemLinks.Add(this.bQSell);
+            this.ribbonPageGroup3.ItemLinks.Add(this.bSell);
+            this.ribbonPageGroup3.Name = "ribbonPageGroup3";
+            this.ribbonPageGroup3.ShowCaptionButton = false;
+            this.ribbonPageGroup3.Text = "Transaction";
             // 
             // ribbonPageGroup1
             // 
@@ -164,21 +183,14 @@
             this.nCustomers.Name = "nCustomers";
             this.nCustomers.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.nCustomers_LinkClicked);
             // 
-            // ribbonPageGroup3
+            // bQSell
             // 
-            this.ribbonPageGroup3.ItemLinks.Add(this.bSell);
-            this.ribbonPageGroup3.Name = "ribbonPageGroup3";
-            this.ribbonPageGroup3.ShowCaptionButton = false;
-            this.ribbonPageGroup3.Text = "Transaction";
-            // 
-            // bSell
-            // 
-            this.bSell.Caption = "Sell";
-            this.bSell.Glyph = ((System.Drawing.Image)(resources.GetObject("bSell.Glyph")));
-            this.bSell.Id = 3;
-            this.bSell.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("bSell.LargeGlyph")));
-            this.bSell.Name = "bSell";
-            this.bSell.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.bSell_ItemClick);
+            this.bQSell.Caption = "Quick Sell";
+            this.bQSell.Glyph = ((System.Drawing.Image)(resources.GetObject("bQSell.Glyph")));
+            this.bQSell.Id = 4;
+            this.bQSell.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("bQSell.LargeGlyph")));
+            this.bQSell.Name = "bQSell";
+            this.bQSell.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.bQSell_ItemClick);
             // 
             // MainForm
             // 
@@ -216,6 +228,7 @@
         private DevExpress.XtraNavBar.NavBarItem nCustomers;
         private DevExpress.XtraBars.BarButtonItem bSell;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup3;
+        private DevExpress.XtraBars.BarButtonItem bQSell;
     }
 }
 

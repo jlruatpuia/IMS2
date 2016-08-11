@@ -51,6 +51,60 @@ namespace IMS2.Codes
             sc.DT = ds.Tables[0];
             return sc;
         }
+        public ServerToClient GetProducts(string SubCategory)
+        {
+            ServerToClient sc = new ServerToClient();
+            MySqlCommand cmd = new MySqlCommand("SELECT ID, Company, ProductName, BarCode, BuyingValue, SellingValue, MfgDate, ExpDate, Category, SubCategory, PackageSize, Quantity FROM product WHERE SubCategory='" + SubCategory + "'", cm);
+            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+            sc.DT = ds.Tables[0];
+            return sc;
+        }
+
+        public ServerToClient GetProducts(string Company, bool f)
+        {
+            ServerToClient sc = new ServerToClient();
+            MySqlCommand cmd = new MySqlCommand("SELECT ID, Company, ProductName, BarCode, BuyingValue, SellingValue, MfgDate, ExpDate, Category, SubCategory, PackageSize, Quantity FROM product WHERE Company='" + Company + "'", cm);
+            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+            sc.DT = ds.Tables[0];
+            return sc;
+        }
+
+        public ServerToClient GetProducts(int Category, string SubCategory)
+        {
+            ServerToClient sc = new ServerToClient();
+            MySqlCommand cmd = new MySqlCommand("SELECT ID, Company, ProductName, BarCode, BuyingValue, SellingValue, MfgDate, ExpDate, Category, SubCategory, PackageSize, Quantity FROM product WHERE Category=" + Category + " AND SubCategory='" + SubCategory + "'", cm);
+            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+            sc.DT = ds.Tables[0];
+            return sc;
+        }
+
+        public ServerToClient GetProducts(string SubCategory, string Company)
+        {
+            ServerToClient sc = new ServerToClient();
+            MySqlCommand cmd = new MySqlCommand("SELECT ID, Company, ProductName, BarCode, BuyingValue, SellingValue, MfgDate, ExpDate, Category, SubCategory, PackageSize, Quantity FROM product WHERE SubCategory='" + SubCategory + "' AND Company='" + Company + "'", cm);
+            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+            sc.DT = ds.Tables[0];
+            return sc;
+        }
+
+        public ServerToClient GetProducts(int Category, string SubCategory, string Company)
+        {
+            ServerToClient sc = new ServerToClient();
+            MySqlCommand cmd = new MySqlCommand("SELECT ID, Company, ProductName, BarCode, BuyingValue, SellingValue, MfgDate, ExpDate, Category, SubCategory, PackageSize, Quantity FROM product WHERE Category=" + Category + " AND SubCategory='" + SubCategory + "' AND Company='" + Company + "'", cm);
+            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+            sc.DT = ds.Tables[0];
+            return sc;
+        }
 
         public Product GetProduct(int ID)
         {
@@ -175,10 +229,60 @@ namespace IMS2.Codes
             return sc;
         }
 
+        public ServerToClient updateQuantity(int ID, int Value, string type)
+        {
+            ServerToClient sc = new ServerToClient();
+            MySqlCommand cmd = new MySqlCommand("UPDATE Product SET Quantity=Quantity" + type + "" + Value + " WHERE ID=" + ID, cm);
+
+            try
+            {
+                cm.Open();
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                sc.Message = ex.Message;
+            }
+            finally { cm.Close(); }
+            return sc;
+        }
+
         public ServerToClient GetCompany()
         {
             ServerToClient sc = new ServerToClient();
-            MySqlCommand cmd = new MySqlCommand("SELECT DISTINCT Company FROM product", cm);
+            MySqlCommand cmd = new MySqlCommand("SELECT DISTINCT Company FROM product ORDER BY Company", cm);
+            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+            sc.DT = ds.Tables[0];
+            return sc;
+        }
+
+        public ServerToClient GetCompany(string SubCategory)
+        {
+            ServerToClient sc = new ServerToClient();
+            MySqlCommand cmd = new MySqlCommand("SELECT DISTINCT Company FROM product WHERE SubCategory='" + SubCategory + "' ORDER BY Company", cm);
+            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+            sc.DT = ds.Tables[0];
+            return sc;
+        }
+        public ServerToClient GetCompany(int Category)
+        {
+            ServerToClient sc = new ServerToClient();
+            MySqlCommand cmd = new MySqlCommand("SELECT DISTINCT Company FROM product WHERE Category=" + Category + "  ORDER BY Company", cm);
+            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+            sc.DT = ds.Tables[0];
+            return sc;
+        }
+
+        public ServerToClient GetCompany(int Category, string SubCategory)
+        {
+            ServerToClient sc = new ServerToClient();
+            MySqlCommand cmd = new MySqlCommand("SELECT DISTINCT Company FROM product WHERE Category=" + Category + " AND SubCategory='" + SubCategory + "'  ORDER BY Company", cm);
             MySqlDataAdapter da = new MySqlDataAdapter(cmd);
             DataSet ds = new DataSet();
             da.Fill(ds);
@@ -214,6 +318,28 @@ namespace IMS2.Codes
             catch {; }
             finally { cm.Close(); }
             return c;
+        }
+
+        public ServerToClient GetSubCategory(int CategoryID)
+        {
+            ServerToClient sc = new ServerToClient();
+            MySqlCommand cmd = new MySqlCommand("SELECT DISTINCT SubCategory FROM product WHERE Category=" + CategoryID + " ORDER BY SubCategory", cm);
+            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+            sc.DT = ds.Tables[0];
+            return sc;
+        }
+
+        public ServerToClient GetSubCategory()
+        {
+            ServerToClient sc = new ServerToClient();
+            MySqlCommand cmd = new MySqlCommand("SELECT DISTINCT SubCategory FROM product ORDER BY SubCategory", cm);
+            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+            sc.DT = ds.Tables[0];
+            return sc;
         }
 
         public ServerToClient AddCategory(Category c)
@@ -263,16 +389,7 @@ namespace IMS2.Codes
             return sc;
         }
         
-        public ServerToClient GetSubCategory(int CategoryID)
-        {
-            ServerToClient sc = new ServerToClient();
-            MySqlCommand cmd = new MySqlCommand("SELECT DISTINCT SubCategory FROM product WHERE Category=" + CategoryID + " ORDER BY SubCategory", cm);
-            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
-            DataSet ds = new DataSet();
-            da.Fill(ds);
-            sc.DT = ds.Tables[0];
-            return sc;
-        }
+
 
         #endregion
     }
