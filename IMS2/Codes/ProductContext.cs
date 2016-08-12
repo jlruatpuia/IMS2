@@ -143,6 +143,7 @@ namespace IMS2.Codes
                 if (rd.HasRows)
                 {
                     rd.Read();
+                    p.ID = Convert.ToInt32(rd[0]);
                     p.Company = rd[1].ToString();
                     p.ProductName = rd[2].ToString();
                     p.BarCode = rd[3].ToString();

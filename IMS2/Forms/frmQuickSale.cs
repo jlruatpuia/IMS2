@@ -13,7 +13,7 @@ using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 
 namespace IMS2.Forms
 {
-    public partial class frmSellProduct : DevExpress.XtraEditors.XtraForm
+    public partial class frmQuickSale : DevExpress.XtraEditors.XtraForm
     {
         DataTable dt = new DataTable();
         public double CustomerBalance { get; set; }
@@ -40,7 +40,6 @@ namespace IMS2.Forms
         void Reset()
         {
             InitInvoiceNo();
-            lueCNM.EditValue = null;
             lueCAT.EditValue = null;
             Clear();
             dt = new DataTable();
@@ -56,17 +55,7 @@ namespace IMS2.Forms
         void InitInvoiceNo()
         {
             MySettings m = new MySettings();
-            txtINV.Text = m.GetInvoiceNo(DateTime.Now.Date, "sale", "SHN");
-        }
-
-        void InitCustomers()
-        {
-            ServerToClient sc = new ServerToClient();
-            CustomerContext cc = new CustomerContext();
-            sc = cc.GetCustomers();
-            lueCNM.Properties.DataSource = sc.DT;
-            lueCNM.Properties.DisplayMember = "CustomerName";
-            lueCNM.Properties.ValueMember = "ID";
+            txtINV.Text = m.GetInvoiceNo(DateTime.Now.Date, "SHN");
         }
 
         void InitCategories()
@@ -84,7 +73,7 @@ namespace IMS2.Forms
             ServerToClient sc = new ServerToClient();
             ProductContext pc = new ProductContext();
             sc = pc.GetSubCategory();
-            for(int i = 0; i <= sc.DT.Rows.Count - 1; i++)
+            for (int i = 0; i <= sc.DT.Rows.Count - 1; i++)
             {
                 cboSCT.Properties.Items.Add(sc.DT.Rows[i].ItemArray[0].ToString());
             }
@@ -110,8 +99,7 @@ namespace IMS2.Forms
                 cboCMP.Properties.Items.Add(sc.DT.Rows[i].ItemArray[0].ToString());
             }
         }
-
-        public frmSellProduct()
+        public frmQuickSale()
         {
             InitializeComponent();
 
@@ -120,27 +108,15 @@ namespace IMS2.Forms
             dtpSDT.DateTime = DateTime.Now.Date;
 
             InitInvoiceNo();
-            InitCustomers();
             InitCategories();
             InitSubCategories();
             InitCompany();
             InitProducts();
         }
 
-        private void lueCNM_EditValueChanged(object sender, EventArgs e)
-        {
-            int cid = Convert.ToInt32(lueCNM.EditValue);
-
-            CustomerContext cc = new CustomerContext();
-            ServerToClient sc = new ServerToClient();
-
-            sc = cc.GetCustomerBalance(cid);
-            CustomerBalance = sc.Value;
-        }
-
         private void txtBCD_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode == Keys.Enter)
+            if (e.KeyCode == Keys.Enter)
             {
                 lblMSG.Text = "";
                 string bcd = txtBCD.Text.ToUpper();
@@ -148,7 +124,7 @@ namespace IMS2.Forms
                 Product p = new Product();
 
                 p = pc.GetProduct(bcd);
-                if(p.Quantity <= 0)
+                if (p.Quantity <= 0)
                 {
                     lblMSG.Text = "Product not available right now";
                     txtBCD.Text = "";
@@ -183,7 +159,6 @@ namespace IMS2.Forms
             {
                 int cid = Convert.ToInt32(lueCAT.EditValue);
 
-                //sc = new ServerToClient();
                 sc = pc.GetSubCategory(cid);
 
                 for (int i = 0; i <= sc.DT.Rows.Count - 1; i++)
@@ -191,15 +166,13 @@ namespace IMS2.Forms
                     cboSCT.Properties.Items.Add(sc.DT.Rows[i].ItemArray[0].ToString());
                 }
 
-                //sc = new ServerToClient();
                 sc = pc.GetCompany(cid);
 
-                for(int i = 0; i <= sc.DT.Rows.Count - 1; i++)
+                for (int i = 0; i <= sc.DT.Rows.Count - 1; i++)
                 {
                     cboCMP.Properties.Items.Add(sc.DT.Rows[i].ItemArray[0].ToString());
                 }
 
-                //sc = new ServerToClient();
                 sc = pc.GetProducts(cid);
 
                 luePNM.Properties.DataSource = sc.DT;
@@ -208,21 +181,18 @@ namespace IMS2.Forms
             }
             else
             {
-                //sc = new ServerToClient();
                 sc = pc.GetSubCategory();
                 for (int i = 0; i <= sc.DT.Rows.Count - 1; i++)
                 {
                     cboSCT.Properties.Items.Add(sc.DT.Rows[i].ItemArray[0].ToString());
                 }
 
-                //sc = new ServerToClient();
                 sc = pc.GetCompany();
                 for (int i = 0; i <= sc.DT.Rows.Count - 1; i++)
                 {
                     cboCMP.Properties.Items.Add(sc.DT.Rows[i].ItemArray[0].ToString());
                 }
 
-                //sc = new ServerToClient();
                 sc = pc.GetProducts();
 
                 luePNM.Properties.DataSource = sc.DT;
@@ -233,7 +203,7 @@ namespace IMS2.Forms
 
         private void lueCAT_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
-            if(e.Button.Index == 1)
+            if (e.Button.Index == 1)
             {
                 lueCAT.EditValue = null;
                 luePNM.EditValue = null;
@@ -250,7 +220,7 @@ namespace IMS2.Forms
             if (lueCAT.EditValue == null)
             {
                 //Category null
-                if(cboSCT.SelectedIndex == -1)
+                if (cboSCT.SelectedIndex == -1)
                 {
                     //SubCategory null
                     sc = pc.GetProducts();
@@ -296,7 +266,7 @@ namespace IMS2.Forms
                     luePNM.Properties.DataSource = sc.DT;
                 }
             }
-            
+
             luePNM.Properties.DisplayMember = "ProductName";
             luePNM.Properties.ValueMember = "ID";
         }
@@ -306,11 +276,11 @@ namespace IMS2.Forms
             ServerToClient sc = new ServerToClient();
             ProductContext pc = new ProductContext();
 
-            if(lueCAT.EditValue == null)
+            if (lueCAT.EditValue == null)
             {
-                if(cboSCT.SelectedIndex == -1)
+                if (cboSCT.SelectedIndex == -1)
                 {
-                    if(cboCMP.SelectedIndex == -1)
+                    if (cboCMP.SelectedIndex == -1)
                     {
                         sc = pc.GetProducts();
                         luePNM.Properties.DataSource = sc.DT;
@@ -366,7 +336,7 @@ namespace IMS2.Forms
 
         private void luePNM_EditValueChanged(object sender, EventArgs e)
         {
-            if(luePNM.EditValue != null)
+            if (luePNM.EditValue != null)
             {
                 int pid = Convert.ToInt32(luePNM.EditValue);
 
@@ -395,6 +365,7 @@ namespace IMS2.Forms
                 txtAMT.EditValue = 0;
             }
         }
+
         private void btnAdd_Click(object sender, EventArgs e)
         {
             string bcd = txtBCD.Text.ToUpper();
@@ -420,7 +391,6 @@ namespace IMS2.Forms
             }
             else
                 lblMSG.Text = p.Message;
-            
         }
 
         private void grv_RowUpdated(object sender, DevExpress.XtraGrid.Views.Base.RowObjectEventArgs e)
@@ -461,10 +431,15 @@ namespace IMS2.Forms
             SalesContext ss = new SalesContext();
             Sale s = new Sale();
             SaleDetail sd = new SaleDetail();
+            CustomerContext cc = new CustomerContext();
+            CustomerAccount ca = new CustomerAccount();
+            Customer c = new Customer();
+
+            c = cc.DefaultCustomer();
 
             s.InvoiceNo = txtINV.Text;
             s.SellDate = dtpSDT.DateTime.Date;
-            s.Customer = Convert.ToInt32(lueCNM.EditValue);
+            s.Customer = Convert.ToInt32(c.ID);
             s.Amount = Convert.ToDouble(txtTAM.Text);
             s.Discount = Convert.ToDouble(txtDSC.EditValue);
             s.Payment = Convert.ToDouble(txtPAM.Text);
@@ -472,10 +447,9 @@ namespace IMS2.Forms
 
             sc = ss.AddSale(s);
 
-            CustomerContext cc = new CustomerContext();
-            CustomerAccount ca = new CustomerAccount();
+            
 
-            ca.CustomerID = Convert.ToInt32(lueCNM.EditValue);
+            ca.CustomerID = Convert.ToInt32(c.ID);
             ca.TransDate = s.SellDate;
             ca.Description = s.InvoiceNo;
 
@@ -521,10 +495,10 @@ namespace IMS2.Forms
                 XtraMessageBox.Show(sc.Message);
                 return;
             }
-            if(XtraMessageBox.Show("Product(s) sold. Print Receipt?", "Print", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (XtraMessageBox.Show("Product(s) sold. Print Receipt?", "Print", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 //--------------------------
-                
+
 
             }
             Reset();
@@ -569,30 +543,6 @@ namespace IMS2.Forms
 
             double toPay = Amount - Discount;
             txtBAL.Text = (toPay - Paid).ToString();
-        }
-
-        private void lueCNM_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
-        {
-            if(e.Button.Index == 1)
-            {
-                frmCustomer frm = new frmCustomer("");
-                if(frm.ShowDialog() == DialogResult.OK)
-                {
-                    ServerToClient sc = new ServerToClient();
-                    CustomerContext cc = new CustomerContext();
-                    Customer c = new Customer();
-                    c.CustomerName = frm.CNM;
-                    c.Address = frm.ADR;
-                    c.Phone = frm.PHN;
-
-                    sc = cc.AddCustomer(c);
-                    if(sc.Message == null)
-                    {
-                        InitCustomers();
-                        lueCNM.EditValue = sc.Count;
-                    }
-                }
-            }
         }
     }
 }
