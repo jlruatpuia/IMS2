@@ -15,6 +15,7 @@ namespace IMS2.Forms
     public partial class frmEditProduct : DevExpress.XtraEditors.XtraForm
     {
         public int _id { get; set; }
+        public Product p { get; set; }
 
         void InitCategory()
         {
@@ -47,6 +48,15 @@ namespace IMS2.Forms
                 cboCMP.Properties.Items.Add(sc.DT.Rows[i].ItemArray[0].ToString());
             }
         }
+
+        public frmEditProduct()
+        {
+            InitializeComponent();
+            InitCategory();
+            InitCompany();
+            Text = "Add New Product";
+        }
+
         public frmEditProduct(int ID)
         {
             InitializeComponent();
@@ -57,17 +67,16 @@ namespace IMS2.Forms
             ProductContext pc = new ProductContext();
             Product p = new Product();
             p = pc.GetProduct(ID);
-            cboCMP.Text = p.Company;
-            txtPNM.Text = p.ProductName;
-            txtBCD.Text = p.BarCode;
-            txtBVL.Text = p.BuyingValue.ToString();
-            txtSVL.Text = p.SellingValue.ToString();
-            txtMFG.Text = p.MfgDate;
-            txtEXP.Text = p.ExpDate;
             lueCAT.EditValue = p.Category;
             cboSCT.Text = p.SubCategory;
+            cboCMP.Text = p.Company;
+            txtPNM.Text = p.ProductName;
             txtPKG.Text = p.PackageSize;
-            txtQTY.Text = p.Quantity.ToString();
+        }
+
+        public frmEditProduct(int ID, string Something)
+        {
+            InitializeComponent();
         }
 
         private void lueCAT_EditValueChanged(object sender, EventArgs e)
@@ -77,28 +86,39 @@ namespace IMS2.Forms
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            ProductContext pc = new ProductContext();
-            ServerToClient sc = new ServerToClient();
-
-            Product p = new Product();
+            p = new Product();
             p.ID = _id;
-            p.Company = cboCMP.Text;
-            p.ProductName = txtPNM.Text;
-            p.BarCode = txtBCD.Text;
-            p.BuyingValue = Convert.ToDouble(txtBVL.Text);
-            p.SellingValue = Convert.ToDouble(txtSVL.Text);
-            p.MfgDate = txtMFG.Text;
-            p.ExpDate = txtEXP.Text;
             p.Category = Convert.ToInt32(lueCAT.EditValue);
             p.SubCategory = cboSCT.Text;
+            p.Company = cboCMP.Text;
+            p.ProductName = txtPNM.Text;
             p.PackageSize = txtPKG.Text;
-            p.Quantity = Convert.ToInt32(txtQTY.Text);
-            sc = pc.UpdateProduct(p);
+            DialogResult = DialogResult.OK;
+        }
 
-            if (sc.Message == null)
+        private void lueCAT_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            if(e.Button.Index == 1)
             {
-                XtraMessageBox.Show("Product Updated!");
-                DialogResult = DialogResult.OK;
+                frmCategory frm = new frmCategory();
+                if(frm.ShowDialog() == DialogResult.OK)
+                {
+                    Category c = new Category();
+                    ServerToClient sc = new ServerToClient();
+                    ProductContext px = new ProductContext();
+
+                    c.CategoryName = frm.CNM;
+
+                    sc = px.AddCategory(c);
+
+                    if (sc.Message == null)
+                    {
+                        InitCategory();
+                        lueCAT.EditValue = sc.Count;
+                    }
+                    else
+                        XtraMessageBox.Show(sc.Message);
+                }
             }
         }
     }

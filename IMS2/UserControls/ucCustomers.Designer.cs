@@ -46,8 +46,18 @@
             this.bNew = new DevExpress.XtraBars.BarButtonItem();
             this.bEdit = new DevExpress.XtraBars.BarButtonItem();
             this.bDelete = new DevExpress.XtraBars.BarButtonItem();
+            this.barSubItem1 = new DevExpress.XtraBars.BarSubItem();
+            this.bCusList = new DevExpress.XtraBars.BarButtonItem();
+            this.bCustDtlReport = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
+            this.barSubItem2 = new DevExpress.XtraBars.BarSubItem();
+            this.bExpPDF = new DevExpress.XtraBars.BarButtonItem();
+            this.bExpXLS = new DevExpress.XtraBars.BarButtonItem();
+            this.bExpXLSX = new DevExpress.XtraBars.BarButtonItem();
+            this.bCustAccount = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
-            this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.rpgRecords = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             ((System.ComponentModel.ISupportInitialize)(this.grvD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grv)).BeginInit();
@@ -196,9 +206,18 @@
             this.ribbonControl1.ExpandCollapseItem,
             this.bNew,
             this.bEdit,
-            this.bDelete});
+            this.bDelete,
+            this.barSubItem1,
+            this.barButtonItem1,
+            this.barSubItem2,
+            this.bCusList,
+            this.bCustDtlReport,
+            this.bCustAccount,
+            this.bExpPDF,
+            this.bExpXLS,
+            this.bExpXLSX});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.MaxItemId = 4;
+            this.ribbonControl1.MaxItemId = 13;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPage1});
@@ -231,21 +250,101 @@
             this.bDelete.Name = "bDelete";
             this.bDelete.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.bDelete_ItemClick);
             // 
+            // barSubItem1
+            // 
+            this.barSubItem1.Caption = "&Print";
+            this.barSubItem1.Glyph = ((System.Drawing.Image)(resources.GetObject("barSubItem1.Glyph")));
+            this.barSubItem1.Id = 4;
+            this.barSubItem1.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("barSubItem1.LargeGlyph")));
+            this.barSubItem1.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.bCusList),
+            new DevExpress.XtraBars.LinkPersistInfo(this.bCustDtlReport)});
+            this.barSubItem1.Name = "barSubItem1";
+            // 
+            // bCusList
+            // 
+            this.bCusList.Caption = "Customer List";
+            this.bCusList.Id = 7;
+            this.bCusList.Name = "bCusList";
+            this.bCusList.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.bCusList_ItemClick);
+            // 
+            // bCustDtlReport
+            // 
+            this.bCustDtlReport.Caption = "Customer Detail Report";
+            this.bCustDtlReport.Id = 8;
+            this.bCustDtlReport.Name = "bCustDtlReport";
+            this.bCustDtlReport.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.bCustDtlReport_ItemClick);
+            // 
+            // barButtonItem1
+            // 
+            this.barButtonItem1.Caption = "barButtonItem1";
+            this.barButtonItem1.Id = 5;
+            this.barButtonItem1.Name = "barButtonItem1";
+            // 
+            // barSubItem2
+            // 
+            this.barSubItem2.Caption = "E&xport";
+            this.barSubItem2.Glyph = ((System.Drawing.Image)(resources.GetObject("barSubItem2.Glyph")));
+            this.barSubItem2.Id = 6;
+            this.barSubItem2.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("barSubItem2.LargeGlyph")));
+            this.barSubItem2.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.bExpPDF),
+            new DevExpress.XtraBars.LinkPersistInfo(this.bExpXLS),
+            new DevExpress.XtraBars.LinkPersistInfo(this.bExpXLSX)});
+            this.barSubItem2.Name = "barSubItem2";
+            // 
+            // bExpPDF
+            // 
+            this.bExpPDF.Caption = "Portable Document Format (pdf)";
+            this.bExpPDF.Id = 10;
+            this.bExpPDF.Name = "bExpPDF";
+            this.bExpPDF.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.bExpPDF_ItemClick);
+            // 
+            // bExpXLS
+            // 
+            this.bExpXLS.Caption = "Excel 2003 Format (xls)";
+            this.bExpXLS.Id = 11;
+            this.bExpXLS.Name = "bExpXLS";
+            this.bExpXLS.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.bExpXLS_ItemClick);
+            // 
+            // bExpXLSX
+            // 
+            this.bExpXLSX.Caption = "Excel 2007 Format (xlsx)";
+            this.bExpXLSX.Id = 12;
+            this.bExpXLSX.Name = "bExpXLSX";
+            this.bExpXLSX.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.bExpXLSX_ItemClick);
+            // 
+            // bCustAccount
+            // 
+            this.bCustAccount.Caption = "Customer Account";
+            this.bCustAccount.Id = 9;
+            this.bCustAccount.Name = "bCustAccount";
+            this.bCustAccount.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.bCustAccount_ItemClick);
+            // 
             // ribbonPage1
             // 
             this.ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
-            this.ribbonPageGroup1});
+            this.rpgRecords,
+            this.ribbonPageGroup2});
             this.ribbonPage1.Name = "ribbonPage1";
             this.ribbonPage1.Text = "Customers";
             // 
-            // ribbonPageGroup1
+            // rpgRecords
             // 
-            this.ribbonPageGroup1.ItemLinks.Add(this.bNew);
-            this.ribbonPageGroup1.ItemLinks.Add(this.bEdit);
-            this.ribbonPageGroup1.ItemLinks.Add(this.bDelete);
-            this.ribbonPageGroup1.Name = "ribbonPageGroup1";
-            this.ribbonPageGroup1.ShowCaptionButton = false;
-            this.ribbonPageGroup1.Text = "Records";
+            this.rpgRecords.ItemLinks.Add(this.bNew);
+            this.rpgRecords.ItemLinks.Add(this.bEdit);
+            this.rpgRecords.ItemLinks.Add(this.bDelete);
+            this.rpgRecords.Name = "rpgRecords";
+            this.rpgRecords.ShowCaptionButton = false;
+            this.rpgRecords.Text = "Records";
+            // 
+            // ribbonPageGroup2
+            // 
+            this.ribbonPageGroup2.ItemLinks.Add(this.barSubItem1);
+            this.ribbonPageGroup2.ItemLinks.Add(this.barSubItem2);
+            this.ribbonPageGroup2.Name = "ribbonPageGroup2";
+            this.ribbonPageGroup2.ShowCaptionButton = false;
+            this.ribbonPageGroup2.Text = "Print";
             // 
             // ucCustomers
             // 
@@ -266,7 +365,7 @@
 
         #endregion
         private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage1;
-        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup1;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup rpgRecords;
         private DevExpress.XtraBars.BarButtonItem bNew;
         private DevExpress.XtraBars.BarButtonItem bEdit;
         private DevExpress.XtraBars.BarButtonItem bDelete;
@@ -283,5 +382,15 @@
         private DevExpress.XtraGrid.Columns.GridColumn colCDA;
         private DevExpress.XtraGrid.Columns.GridColumn colBAL;
         public DevExpress.XtraBars.Ribbon.RibbonControl ribbonControl1;
+        private DevExpress.XtraBars.BarSubItem barSubItem1;
+        private DevExpress.XtraBars.BarButtonItem bCusList;
+        private DevExpress.XtraBars.BarButtonItem bCustDtlReport;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem1;
+        private DevExpress.XtraBars.BarSubItem barSubItem2;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup2;
+        private DevExpress.XtraBars.BarButtonItem bCustAccount;
+        private DevExpress.XtraBars.BarButtonItem bExpPDF;
+        private DevExpress.XtraBars.BarButtonItem bExpXLS;
+        private DevExpress.XtraBars.BarButtonItem bExpXLSX;
     }
 }

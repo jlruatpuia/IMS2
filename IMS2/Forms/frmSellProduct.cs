@@ -10,10 +10,12 @@ using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using IMS2.Codes;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
+using IMS2.Reports;
+using DevExpress.XtraReports.UI;
 
 namespace IMS2.Forms
 {
-    public partial class frmSellProduct : DevExpress.XtraEditors.XtraForm
+    public partial class frmSellProduct : XtraForm
     {
         DataTable dt = new DataTable();
         public double CustomerBalance { get; set; }
@@ -41,7 +43,7 @@ namespace IMS2.Forms
         {
             InitInvoiceNo();
             lueCNM.EditValue = null;
-            lueCAT.EditValue = null;
+            //lueCAT.EditValue = null;
             Clear();
             dt = new DataTable();
             InitDataTable();
@@ -56,7 +58,7 @@ namespace IMS2.Forms
         void InitInvoiceNo()
         {
             MySettings m = new MySettings();
-            txtINV.Text = m.GetInvoiceNo(DateTime.Now.Date, "sale", "SHN");
+            txtINV.Text = m.GetInvoiceNo(DateTime.Now.Date, "sale", "KVM");
         }
 
         void InitCustomers()
@@ -69,27 +71,6 @@ namespace IMS2.Forms
             lueCNM.Properties.ValueMember = "ID";
         }
 
-        void InitCategories()
-        {
-            ServerToClient sc = new ServerToClient();
-            ProductContext pc = new ProductContext();
-            sc = pc.GetCategories();
-            lueCAT.Properties.DataSource = sc.DT;
-            lueCAT.Properties.DisplayMember = "CategoryName";
-            lueCAT.Properties.ValueMember = "ID";
-        }
-
-        void InitSubCategories()
-        {
-            ServerToClient sc = new ServerToClient();
-            ProductContext pc = new ProductContext();
-            sc = pc.GetSubCategory();
-            for(int i = 0; i <= sc.DT.Rows.Count - 1; i++)
-            {
-                cboSCT.Properties.Items.Add(sc.DT.Rows[i].ItemArray[0].ToString());
-            }
-        }
-
         void InitProducts()
         {
             ServerToClient sc = new ServerToClient();
@@ -98,17 +79,6 @@ namespace IMS2.Forms
             luePNM.Properties.DataSource = sc.DT;
             luePNM.Properties.DisplayMember = "ProductName";
             luePNM.Properties.ValueMember = "ID";
-        }
-
-        void InitCompany()
-        {
-            ServerToClient sc = new ServerToClient();
-            ProductContext pc = new ProductContext();
-            sc = pc.GetCompany();
-            for (int i = 0; i <= sc.DT.Rows.Count - 1; i++)
-            {
-                cboCMP.Properties.Items.Add(sc.DT.Rows[i].ItemArray[0].ToString());
-            }
         }
 
         public frmSellProduct()
@@ -121,9 +91,6 @@ namespace IMS2.Forms
 
             InitInvoiceNo();
             InitCustomers();
-            InitCategories();
-            InitSubCategories();
-            InitCompany();
             InitProducts();
         }
 
@@ -146,9 +113,11 @@ namespace IMS2.Forms
                 string bcd = txtBCD.Text.ToUpper();
                 ProductContext pc = new ProductContext();
                 Product p = new Product();
-
+                ProductDetail d = new ProductDetail();
                 p = pc.GetProduct(bcd);
-                if(p.Quantity <= 0)
+                d = pc.GetProductDetail(bcd);
+
+                if(d.Quantity <= 0)
                 {
                     lblMSG.Text = "Product not available right now";
                     txtBCD.Text = "";
@@ -156,7 +125,7 @@ namespace IMS2.Forms
                 }
                 if (p.Message == null)
                 {
-                    dt.Rows.Add(p.ID, p.ProductName, p.BarCode, p.SellingValue, p.BuyingValue, 1, p.SellingValue);
+                    dt.Rows.Add(p.ID, p.ProductName, d.BarCode, d.SellingValue, d.BuyingValue, 1, d.SellingValue);
                     grd.DataSource = dt;
                     grd.Refresh();
 
@@ -171,199 +140,6 @@ namespace IMS2.Forms
             }
         }
 
-        private void lueCAT_EditValueChanged(object sender, EventArgs e)
-        {
-            ProductContext pc = new ProductContext();
-            ServerToClient sc = new ServerToClient();
-
-            cboSCT.Properties.Items.Clear();
-            cboCMP.Properties.Items.Clear();
-
-            if (lueCAT.EditValue != null)
-            {
-                int cid = Convert.ToInt32(lueCAT.EditValue);
-
-                //sc = new ServerToClient();
-                sc = pc.GetSubCategory(cid);
-
-                for (int i = 0; i <= sc.DT.Rows.Count - 1; i++)
-                {
-                    cboSCT.Properties.Items.Add(sc.DT.Rows[i].ItemArray[0].ToString());
-                }
-
-                //sc = new ServerToClient();
-                sc = pc.GetCompany(cid);
-
-                for(int i = 0; i <= sc.DT.Rows.Count - 1; i++)
-                {
-                    cboCMP.Properties.Items.Add(sc.DT.Rows[i].ItemArray[0].ToString());
-                }
-
-                //sc = new ServerToClient();
-                sc = pc.GetProducts(cid);
-
-                luePNM.Properties.DataSource = sc.DT;
-                luePNM.Properties.DisplayMember = "ProductName";
-                luePNM.Properties.ValueMember = "ID";
-            }
-            else
-            {
-                //sc = new ServerToClient();
-                sc = pc.GetSubCategory();
-                for (int i = 0; i <= sc.DT.Rows.Count - 1; i++)
-                {
-                    cboSCT.Properties.Items.Add(sc.DT.Rows[i].ItemArray[0].ToString());
-                }
-
-                //sc = new ServerToClient();
-                sc = pc.GetCompany();
-                for (int i = 0; i <= sc.DT.Rows.Count - 1; i++)
-                {
-                    cboCMP.Properties.Items.Add(sc.DT.Rows[i].ItemArray[0].ToString());
-                }
-
-                //sc = new ServerToClient();
-                sc = pc.GetProducts();
-
-                luePNM.Properties.DataSource = sc.DT;
-                luePNM.Properties.DisplayMember = "ProductName";
-                luePNM.Properties.ValueMember = "ID";
-            }
-        }
-
-        private void lueCAT_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
-        {
-            if(e.Button.Index == 1)
-            {
-                lueCAT.EditValue = null;
-                luePNM.EditValue = null;
-                cboSCT.SelectedIndex = -1;
-                cboCMP.SelectedIndex = -1;
-            }
-        }
-
-        private void cboSCT_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ProductContext pc = new ProductContext();
-            ServerToClient sc = new ServerToClient();
-            cboCMP.Properties.Items.Clear();
-            if (lueCAT.EditValue == null)
-            {
-                //Category null
-                if(cboSCT.SelectedIndex == -1)
-                {
-                    //SubCategory null
-                    sc = pc.GetProducts();
-                    luePNM.Properties.DataSource = sc.DT;
-                }
-                else
-                {
-                    //SubCategory value
-                    sc = pc.GetCompany();
-                    for (int i = 0; i <= sc.DT.Rows.Count - 1; i++)
-                    {
-                        cboCMP.Properties.Items.Add(sc.DT.Rows[i].ItemArray[0].ToString());
-                    }
-
-                    sc = pc.GetProducts(cboSCT.Text);
-                    luePNM.Properties.DataSource = sc.DT;
-                }
-            }
-            else
-            {
-                //Category value
-                int cid = Convert.ToInt32(lueCAT.EditValue);
-                if (cboSCT.SelectedIndex == -1)
-                {
-                    //SubCategory null
-                    sc = pc.GetCompany(cid);
-                    for (int i = 0; i <= sc.DT.Rows.Count - 1; i++)
-                    {
-                        cboCMP.Properties.Items.Add(sc.DT.Rows[i].ItemArray[0].ToString());
-                    }
-                    sc = pc.GetProducts(cid);
-                    luePNM.Properties.DataSource = sc.DT;
-                }
-                else
-                {
-                    //SubCategory Value
-                    sc = pc.GetCompany(cid, cboSCT.Text);
-                    for (int i = 0; i <= sc.DT.Rows.Count - 1; i++)
-                    {
-                        cboCMP.Properties.Items.Add(sc.DT.Rows[i].ItemArray[0].ToString());
-                    }
-                    sc = pc.GetProducts(cid, cboSCT.Text);
-                    luePNM.Properties.DataSource = sc.DT;
-                }
-            }
-            
-            luePNM.Properties.DisplayMember = "ProductName";
-            luePNM.Properties.ValueMember = "ID";
-        }
-
-        private void cboCMP_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ServerToClient sc = new ServerToClient();
-            ProductContext pc = new ProductContext();
-
-            if(lueCAT.EditValue == null)
-            {
-                if(cboSCT.SelectedIndex == -1)
-                {
-                    if(cboCMP.SelectedIndex == -1)
-                    {
-                        sc = pc.GetProducts();
-                        luePNM.Properties.DataSource = sc.DT;
-                    }
-                    else
-                    {
-                        sc = pc.GetProducts(cboCMP.Text, false);
-                        luePNM.Properties.DataSource = sc.DT;
-                    }
-                }
-                else
-                {
-                    if (cboCMP.SelectedIndex == -1)
-                    {
-                        sc = pc.GetProducts(cboSCT.Text);
-                        luePNM.Properties.DataSource = sc.DT;
-                    }
-                    else
-                    {
-                        sc = pc.GetProducts(cboSCT.Text, cboCMP.Text);
-                        luePNM.Properties.DataSource = sc.DT;
-                    }
-                }
-            }
-            else
-            {
-                int cid = Convert.ToInt32(lueCAT.EditValue);
-                if (cboSCT.SelectedIndex == -1)
-                {
-                    if (cboCMP.SelectedIndex == -1)
-                    {
-                        sc = pc.GetProducts(cid);
-                        luePNM.Properties.DataSource = sc.DT;
-                    }
-                }
-                else
-                {
-                    if (cboCMP.SelectedIndex == -1)
-                    {
-                        sc = pc.GetProducts(cboSCT.Text);
-                        luePNM.Properties.DataSource = sc.DT;
-                    }
-                    else
-                    {
-                        sc = pc.GetProducts(cboSCT.Text, cboCMP.Text);
-                        luePNM.Properties.DataSource = sc.DT;
-                    }
-                }
-            }
-            luePNM.Properties.DisplayMember = "ProductName";
-            luePNM.Properties.ValueMember = "ID";
-        }
-
         private void luePNM_EditValueChanged(object sender, EventArgs e)
         {
             if(luePNM.EditValue != null)
@@ -372,20 +148,21 @@ namespace IMS2.Forms
 
                 ProductContext pc = new ProductContext();
                 Product p = new Product();
-
+                ProductDetail d = new ProductDetail();
                 p = pc.GetProduct(pid);
+                d = pc.GetProductDetail(pid);
 
-                txtBVL.EditValue = p.BuyingValue;
-                txtSVL.EditValue = p.SellingValue;
-                txtQTY.Properties.MaxValue = p.Quantity;
-                if (p.Quantity <= 0)
+                txtBVL.EditValue = d.BuyingValue;
+                txtSVL.EditValue = d.SellingValue;
+                txtQTY.Properties.MaxValue = d.Quantity;
+                if (d.Quantity <= 0)
                     btnAdd.Enabled = false;
                 else
                 {
                     txtQTY.EditValue = 1;
                     btnAdd.Enabled = true;
                 }
-                txtAMT.EditValue = p.SellingValue * 1;
+                txtAMT.EditValue = d.SellingValue * 1;
             }
             else
             {
@@ -400,15 +177,17 @@ namespace IMS2.Forms
             string bcd = txtBCD.Text.ToUpper();
             ProductContext pc = new ProductContext();
             Product p = new Product();
+            ProductDetail d = new ProductDetail();
             int pid = Convert.ToInt32(luePNM.EditValue);
             p = pc.GetProduct(pid);
-            if (p.Quantity <= 0)
+            d = pc.GetProductDetail(pid);
+            if (d.Quantity <= 0)
             {
                 lblMSG.Text = "Product not available right now";
             }
             if (p.Message == null)
             {
-                dt.Rows.Add(pid, p.ProductName, p.BarCode, p.SellingValue, p.BuyingValue, 1, p.SellingValue);
+                dt.Rows.Add(pid, p.ProductName, d.BarCode, d.SellingValue, d.BuyingValue, 1, d.SellingValue);
                 grd.DataSource = dt;
                 grd.Refresh();
 
@@ -474,10 +253,14 @@ namespace IMS2.Forms
 
             CustomerContext cc = new CustomerContext();
             CustomerAccount ca = new CustomerAccount();
+            //Customer c = new Customer();
 
             ca.CustomerID = Convert.ToInt32(lueCNM.EditValue);
             ca.TransDate = s.SellDate;
             ca.Description = s.InvoiceNo;
+
+            //c.CustomerName = cc.GetCustomer(ca.CustomerID).CustomerName;
+
 
             if (s.Balance == 0)
             {
@@ -523,10 +306,53 @@ namespace IMS2.Forms
             }
             if(XtraMessageBox.Show("Product(s) sold. Print Receipt?", "Print", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                //--------------------------
-                
+                sc = new ServerToClient();
+                ss = new SalesContext();
+                sc = ss.GetSales(txtINV.Text);
+                rptSaleInvoice rpt = new rptSaleInvoice() { DataSource = sc.DT };
+                rpt.lbCNM.Text = cc.GetCustomer(ca.CustomerID).CustomerName;
+                rpt.lbADR.Text = cc.GetCustomer(ca.CustomerID).Address;
+                rpt.lbPHN.Text = cc.GetCustomer(ca.CustomerID).Phone;
+
+                rpt.lbINV.Text = txtINV.Text;
+                rpt.lbSDT.Text = dtpSDT.DateTime.ToShortDateString();
+
+                rpt.lbPNM.DataBindings.Add("Text", null, "ProductName");
+                rpt.lbBCD.DataBindings.Add("Text", null, "BarCode");
+                rpt.lbQTY.DataBindings.Add("Text", null, "Quantity");
+                rpt.lbPRC.DataBindings.Add("Text", null, "SellingValue", "{0:c}");
+                rpt.lbAMT.DataBindings.Add("Text", null, "Amount", "{0:c}");
+
+                if (s.Discount > 0)
+                {
+                    rpt.xrLabel3.Visible = true;
+                    rpt.lbDSC.Text = "(-) " + s.Discount.ToString("c2");
+                }
+                else
+                {
+                    rpt.xrLabel3.Visible = false;
+                    rpt.lbDSC.Text = "";
+                }
+
+                rpt.lbTTL.Text = (s.Amount - s.Discount).ToString("c2");
+                rpt.lbWRD.Text = "Rupees " + MySettings.NumbersToWords(Convert.ToInt32(s.Amount - s.Discount)) + " only";
+
+                rpt.ShowPreviewDialog();
 
             }
+            grd.DataSource = null;
+            InitInvoiceNo();
+            //lueCAT.EditValue = null;
+            //luePNM.EditValue = null;
+            //lueCAT.Properties.DataSource = null;
+            //luePNM.Properties.DataSource = null;
+            //InitCategories();
+            InitProducts();
+            dt.Clear();
+            Reset();
+
+
+        
             Reset();
         }
 

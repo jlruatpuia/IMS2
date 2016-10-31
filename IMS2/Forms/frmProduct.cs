@@ -13,7 +13,7 @@ using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 
 namespace IMS2.Forms
 {
-    public partial class frmAddProduct : XtraForm
+    public partial class frmProduct : XtraForm
     {
         DataTable dt;
 
@@ -104,7 +104,7 @@ namespace IMS2.Forms
             txtBCD.Text = "";
         }
 
-        public frmAddProduct()
+        public frmProduct()
         {
             InitializeComponent();
             InitCategory();
@@ -116,7 +116,7 @@ namespace IMS2.Forms
         {
             if(e.Button.Index == 1)
             {
-                frmAddCategory frm = new frmAddCategory();
+                frmCategory frm = new frmCategory();
                 if(frm.ShowDialog() == DialogResult.OK)
                 {
                     Category c = new Category();
@@ -176,18 +176,19 @@ namespace IMS2.Forms
             for (int i = 0; i <= grv.RowCount - 1; i++)
             {
                 Product p = new Product();
-
-                p.Company = grv.GetRowCellValue(i, colCMP).ToString();
-                p.ProductName = grv.GetRowCellValue(i, colPNM).ToString();
-                p.BarCode = grv.GetRowCellValue(i, colBCD).ToString();
-                p.BuyingValue = Convert.ToDouble(grv.GetRowCellValue(i, colBVL));
-                p.SellingValue = Convert.ToDouble(grv.GetRowCellValue(i, colSVL));
-                p.MfgDate = grv.GetRowCellValue(i, colMFG).ToString();
-                p.ExpDate = grv.GetRowCellValue(i, colEXP).ToString();
                 p.Category = Convert.ToInt32(grv.GetRowCellValue(i, colCAT));
                 p.SubCategory = grv.GetRowCellValue(i, colSCT).ToString();
+                p.Company = grv.GetRowCellValue(i, colCMP).ToString();
+                p.ProductName = grv.GetRowCellValue(i, colPNM).ToString();
                 p.PackageSize = grv.GetRowCellValue(i, colPKG).ToString();
-                p.Quantity = Convert.ToInt32(grv.GetRowCellValue(i, colQTY));
+
+                ProductDetail d = new ProductDetail();
+                d.BarCode = grv.GetRowCellValue(i, colBCD).ToString();
+                d.BuyingValue = Convert.ToDouble(grv.GetRowCellValue(i, colBVL));
+                d.SellingValue = Convert.ToDouble(grv.GetRowCellValue(i, colSVL));
+                d.MfgDate = grv.GetRowCellValue(i, colMFG).ToString();
+                d.ExpDate = grv.GetRowCellValue(i, colEXP).ToString();
+                d.Quantity = Convert.ToInt32(grv.GetRowCellValue(i, colQTY));
                 sc = pc.AddProduct(p);
             }
 

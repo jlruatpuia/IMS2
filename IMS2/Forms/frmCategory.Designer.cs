@@ -1,6 +1,6 @@
 ﻿namespace IMS2.Forms
 {
-    partial class frmAddCategory
+    partial class frmCategory
     {
         /// <summary>
         /// Required designer variable.
@@ -29,19 +29,19 @@
         private void InitializeComponent()
         {
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
-            this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.txtCNM = new DevExpress.XtraEditors.TextEdit();
-            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.btnAdd = new DevExpress.XtraEditors.SimpleButton();
-            this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
+            this.btnAdd = new DevExpress.XtraEditors.SimpleButton();
+            this.txtCNM = new DevExpress.XtraEditors.TextEdit();
+            this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCNM.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
@@ -59,9 +59,41 @@
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(690, 275, 250, 350);
             this.layoutControl1.Root = this.layoutControlGroup1;
-            this.layoutControl1.Size = new System.Drawing.Size(434, 85);
+            this.layoutControl1.Size = new System.Drawing.Size(406, 70);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancel.Location = new System.Drawing.Point(314, 36);
+            this.btnCancel.MaximumSize = new System.Drawing.Size(80, 20);
+            this.btnCancel.MinimumSize = new System.Drawing.Size(80, 20);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(80, 20);
+            this.btnCancel.StyleController = this.layoutControl1;
+            this.btnCancel.TabIndex = 6;
+            this.btnCancel.Text = "&Cancel";
+            // 
+            // btnAdd
+            // 
+            this.btnAdd.Location = new System.Drawing.Point(220, 36);
+            this.btnAdd.MaximumSize = new System.Drawing.Size(80, 20);
+            this.btnAdd.MinimumSize = new System.Drawing.Size(80, 20);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(80, 20);
+            this.btnAdd.StyleController = this.layoutControl1;
+            this.btnAdd.TabIndex = 5;
+            this.btnAdd.Text = "&Save";
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            // 
+            // txtCNM
+            // 
+            this.txtCNM.Location = new System.Drawing.Point(94, 12);
+            this.txtCNM.Name = "txtCNM";
+            this.txtCNM.Size = new System.Drawing.Size(300, 20);
+            this.txtCNM.StyleController = this.layoutControl1;
+            this.txtCNM.TabIndex = 4;
             // 
             // layoutControlGroup1
             // 
@@ -75,74 +107,42 @@
             this.emptySpaceItem2});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "Root";
-            this.layoutControlGroup1.Size = new System.Drawing.Size(434, 85);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(406, 70);
             this.layoutControlGroup1.TextVisible = false;
-            // 
-            // txtCNM
-            // 
-            this.txtCNM.Location = new System.Drawing.Point(95, 12);
-            this.txtCNM.Name = "txtCNM";
-            this.txtCNM.Size = new System.Drawing.Size(327, 20);
-            this.txtCNM.StyleController = this.layoutControl1;
-            this.txtCNM.TabIndex = 4;
             // 
             // layoutControlItem1
             // 
             this.layoutControlItem1.Control = this.txtCNM;
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(414, 24);
+            this.layoutControlItem1.Size = new System.Drawing.Size(386, 24);
             this.layoutControlItem1.Text = "Category Name:";
             this.layoutControlItem1.TextSize = new System.Drawing.Size(79, 13);
-            // 
-            // btnAdd
-            // 
-            this.btnAdd.Location = new System.Drawing.Point(248, 36);
-            this.btnAdd.MaximumSize = new System.Drawing.Size(80, 35);
-            this.btnAdd.MinimumSize = new System.Drawing.Size(80, 35);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(80, 35);
-            this.btnAdd.StyleController = this.layoutControl1;
-            this.btnAdd.TabIndex = 5;
-            this.btnAdd.Text = "&Save";
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // layoutControlItem2
             // 
             this.layoutControlItem2.Control = this.btnAdd;
-            this.layoutControlItem2.Location = new System.Drawing.Point(236, 24);
+            this.layoutControlItem2.Location = new System.Drawing.Point(208, 24);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(84, 41);
+            this.layoutControlItem2.Size = new System.Drawing.Size(84, 26);
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextVisible = false;
-            // 
-            // btnCancel
-            // 
-            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(342, 36);
-            this.btnCancel.MaximumSize = new System.Drawing.Size(80, 35);
-            this.btnCancel.MinimumSize = new System.Drawing.Size(80, 35);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(80, 35);
-            this.btnCancel.StyleController = this.layoutControl1;
-            this.btnCancel.TabIndex = 6;
-            this.btnCancel.Text = "&Cancel";
             // 
             // layoutControlItem3
             // 
             this.layoutControlItem3.Control = this.btnCancel;
-            this.layoutControlItem3.Location = new System.Drawing.Point(330, 24);
+            this.layoutControlItem3.Location = new System.Drawing.Point(302, 24);
             this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(84, 41);
+            this.layoutControlItem3.Size = new System.Drawing.Size(84, 26);
             this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem3.TextVisible = false;
             // 
             // emptySpaceItem1
             // 
             this.emptySpaceItem1.AllowHotTrack = false;
-            this.emptySpaceItem1.Location = new System.Drawing.Point(320, 24);
+            this.emptySpaceItem1.Location = new System.Drawing.Point(292, 24);
             this.emptySpaceItem1.Name = "emptySpaceItem1";
-            this.emptySpaceItem1.Size = new System.Drawing.Size(10, 41);
+            this.emptySpaceItem1.Size = new System.Drawing.Size(10, 26);
             this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
             // 
             // emptySpaceItem2
@@ -150,30 +150,29 @@
             this.emptySpaceItem2.AllowHotTrack = false;
             this.emptySpaceItem2.Location = new System.Drawing.Point(0, 24);
             this.emptySpaceItem2.Name = "emptySpaceItem2";
-            this.emptySpaceItem2.Size = new System.Drawing.Size(236, 41);
+            this.emptySpaceItem2.Size = new System.Drawing.Size(208, 26);
             this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
             // 
-            // frmAddCategory
+            // frmCategory
             // 
             this.AcceptButton = this.btnAdd;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(434, 85);
-            this.ControlBox = false;
+            this.ClientSize = new System.Drawing.Size(406, 70);
             this.Controls.Add(this.layoutControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "frmAddCategory";
+            this.Name = "frmCategory";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Category";
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCNM.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();

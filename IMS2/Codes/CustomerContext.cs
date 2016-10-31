@@ -108,7 +108,7 @@ namespace IMS2.Codes
             MySqlCommand cmd;
             MySqlDataAdapter da;
             DataSet ds = new DataSet();
-            cmd = new MySqlCommand("SELECT ID, CustomerName, Address, Phone FROM Customer WHERE CustomerName NOT LIKE 'DefaultCustomer'", cm);
+            cmd = new MySqlCommand("SELECT ID, CustomerName, Address, Phone FROM Customer", cm);
             da = new MySqlDataAdapter(cmd);
             da.Fill(ds, "Customer");
 
@@ -206,6 +206,90 @@ namespace IMS2.Codes
                 sc.Message = ex.Message;
             }
             finally { cm.Close(); }
+            return sc;
+        }
+
+        public ServerToClient CustomerDetailReport()
+        {
+            ServerToClient sc = new ServerToClient();
+            MySqlCommand cmd = new MySqlCommand("SELECT customer.CustomerName, customer.Address, customer.Phone, customeraccount.TransDate, customeraccount.Description, customeraccount.Debit, customeraccount.Credit, customeraccount.Balance FROM customer INNER JOIN customeraccount ON customeraccount.CustomerID = customer.ID", cm);
+            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+            sc.Count = ds.Tables[0].Rows.Count;
+            sc.DT = ds.Tables[0];
+            return sc;
+        }
+
+        public ServerToClient CustomerDetailReport(int CustomerID)
+        {
+            ServerToClient sc = new ServerToClient();
+            MySqlCommand cmd = new MySqlCommand("SELECT customer.CustomerName, customer.Address, customer.Phone, customeraccount.TransDate, customeraccount.Description, customeraccount.Debit, customeraccount.Credit, customeraccount.Balance FROM customer INNER JOIN customeraccount ON customeraccount.CustomerID = customer.ID WHERE customer.ID=" + CustomerID, cm);
+            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+            sc.Count = ds.Tables[0].Rows.Count;
+            sc.DT = ds.Tables[0];
+            return sc;
+        }
+
+        public ServerToClient AccountStatement(int CustomerID, DateTime DateFrom, DateTime DateTo)
+        {
+            ServerToClient sc = new ServerToClient();
+
+            DataTable dt = new DataTable();
+            dt.Columns.Add("TransDate", typeof(DateTime));
+            dt.Columns.Add("Description", typeof(string));
+            dt.Columns.Add("Debit", typeof(double));
+            dt.Columns.Add("Credit", typeof(double));
+            dt.Columns.Add("Balance", typeof(double));
+            //string dtf = dtFr.Date.Year.ToString("0000") + "-" + dtFr.Date.Month.ToString("00") + "-" + dtFr.Date.Day.ToString("00");
+            //string dtt = dtTo.Date.Year.ToString("0000") + "-" + dtTo.Date.Month.ToString("00") + "-" + dtTo.Date.Day.ToString("00");
+            string dtf = MySettings.getDate(DateFrom);
+            string dtt = MySettings.getDate(DateTo);
+
+            MySqlCommand cmd = new MySqlCommand("SELECT Sum(Debit)-Sum(Credit) AS OpeningBalance FROM CustomerAccount WHERE CustomerID=" + CustomerID + " AND TransDate < '" + dtf + "'", cm);
+            double OpeningBalance = 0;
+            try
+            {
+                cm.Open();
+                OpeningBalance = Convert.ToDouble(cmd.ExecuteScalar());
+            }
+            catch
+            {
+                OpeningBalance = 0;
+            }
+            finally
+            {
+                cm.Close();
+            }
+
+            dt.Rows.Add(DateFrom, "Opening Balance", OpeningBalance, 0, OpeningBalance);
+
+
+
+            cmd = new MySqlCommand("SELECT TransDate, Description, CASE WHEN Debit=0 THEN NULL ELSE Debit END AS Dr, CASE WHEN Credit=0 THEN NULL ELSE Credit END AS Cr, Balance FROM CustomerAccount WHERE CustomerID=" + CustomerID + " AND CustomerAccount.TransDate BETWEEN DATE('" + dtf + "') AND DATE('" + dtt + "') ORDER BY TransDate", cm);
+
+            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+
+            for (int i = 0; i <= ds.Tables[0].Rows.Count - 1; i++)
+            {
+                DateTime dd = DateTime.Parse(ds.Tables[0].Rows[i].ItemArray[0].ToString());
+                string desc = ds.Tables[0].Rows[i].ItemArray[1].ToString();
+                double debit, credit, balance;
+                try { debit = Convert.ToDouble(ds.Tables[0].Rows[i].ItemArray[2]); }
+                catch { debit = 0; }
+                try { credit = Convert.ToDouble(ds.Tables[0].Rows[i].ItemArray[3]); }
+                catch { credit = 0; }
+                try { balance = Convert.ToDouble(ds.Tables[0].Rows[i].ItemArray[4]); }
+                catch { balance = 0; }
+                dt.Rows.Add(dd, desc, debit, credit, balance);
+            }
+            dt.TableName = "AccountStateMent";
+            sc.DT = dt;
+            sc.Count = dt.Rows.Count;
             return sc;
         }
     }
