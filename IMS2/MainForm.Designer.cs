@@ -61,6 +61,7 @@
             this.nSupplierReport = new DevExpress.XtraNavBar.NavBarItem();
             this.nSupplierDetailReport = new DevExpress.XtraNavBar.NavBarItem();
             this.dlaf = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
+            this.nChart = new DevExpress.XtraNavBar.NavBarItem();
             ((System.ComponentModel.ISupportInitialize)(this.MainRibbon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.spl)).BeginInit();
             this.spl.SuspendLayout();
@@ -278,7 +279,8 @@
             this.bSoldProducts,
             this.nSupplierReport,
             this.nSupplierDetailReport,
-            this.nReports});
+            this.nReports,
+            this.nChart});
             this.navBarControl1.Location = new System.Drawing.Point(0, 0);
             this.navBarControl1.Name = "navBarControl1";
             this.navBarControl1.OptionsNavPane.ExpandedWidth = 188;
@@ -296,9 +298,10 @@
             new DevExpress.XtraNavBar.NavBarItemLink(this.nProducts),
             new DevExpress.XtraNavBar.NavBarItemLink(this.nSuppliers),
             new DevExpress.XtraNavBar.NavBarItemLink(this.nCustomers),
-            new DevExpress.XtraNavBar.NavBarItemLink(this.nReports)});
+            new DevExpress.XtraNavBar.NavBarItemLink(this.nReports),
+            new DevExpress.XtraNavBar.NavBarItemLink(this.nChart)});
             this.navBarGroup1.Name = "navBarGroup1";
-            this.navBarGroup1.TopVisibleLinkIndex = 1;
+            this.navBarGroup1.TopVisibleLinkIndex = 2;
             // 
             // nProducts
             // 
@@ -356,6 +359,14 @@
             this.nSupplierDetailReport.Name = "nSupplierDetailReport";
             this.nSupplierDetailReport.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.nSupplierDetailReport_LinkClicked);
             // 
+            // nChart
+            // 
+            this.nChart.Caption = "Chart";
+            this.nChart.LargeImage = ((System.Drawing.Image)(resources.GetObject("nChart.LargeImage")));
+            this.nChart.Name = "nChart";
+            this.nChart.SmallImage = ((System.Drawing.Image)(resources.GetObject("nChart.SmallImage")));
+            this.nChart.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.nChart_LinkClicked);
+            // 
             // MainForm
             // 
             this.AllowFormGlass = DevExpress.Utils.DefaultBoolean.False;
@@ -411,6 +422,7 @@
         private DevExpress.LookAndFeel.DefaultLookAndFeel dlaf;
         private DevExpress.XtraBars.BarButtonItem bSchedule;
         private DevExpress.XtraNavBar.NavBarItem nReports;
+        private DevExpress.XtraNavBar.NavBarItem nChart;
     }
 }
 

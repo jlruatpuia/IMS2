@@ -19,7 +19,7 @@ namespace IMS2.UserControls
     {
         ServerToClient sc;
         ProductContext px;
-
+        rptProductView rpt = new rptProductView();
         public ucProductsView()
         {
             InitializeComponent();
@@ -58,18 +58,21 @@ namespace IMS2.UserControls
                 sc = px.GetProductReport();
 
                 grd.DataSource = sc.DT;
+                rpt.DataSource = sc.DT;
             }
             else
             {
                 sc = px.GetProductReport(cboField.Text, txtQuery.Text);
 
                 grd.DataSource = sc.DT;
+                rpt.DataSource = sc.DT;
             }
         }
 
         private void bPrint_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             grd.ShowPrintPreview();
+            //new rptProductView().ShowPreviewDialog();
         }
 
         private void bPDF_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)

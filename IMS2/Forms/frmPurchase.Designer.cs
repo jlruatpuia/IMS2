@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPurchase));
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject6 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject5 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject7 = new DevExpress.Utils.SerializableAppearanceObject();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
             this.btnSave = new DevExpress.XtraEditors.SimpleButton();
@@ -86,6 +86,8 @@
             this.colSUPPH = new DevExpress.XtraGrid.Columns.GridColumn();
             this.dtpPDT = new DevExpress.XtraEditors.DateEdit();
             this.txtINV = new DevExpress.XtraEditors.TextEdit();
+            this.txtBVL = new DevExpress.XtraEditors.TextEdit();
+            this.txtSVL = new DevExpress.XtraEditors.TextEdit();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -110,8 +112,6 @@
             this.layoutControlItem20 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem21 = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
-            this.txtBVL = new DevExpress.XtraEditors.TextEdit();
-            this.txtSVL = new DevExpress.XtraEditors.TextEdit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtBAL.Properties)).BeginInit();
@@ -139,6 +139,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dtpPDT.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtpPDT.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtINV.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtBVL.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSVL.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
@@ -163,8 +165,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem20)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem21)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtBVL.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtSVL.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
@@ -524,7 +524,7 @@
             this.txtBCD.Location = new System.Drawing.Point(456, 132);
             this.txtBCD.Name = "txtBCD";
             this.txtBCD.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("txtBCD.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("txtBCD.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject6, "", null, null, true)});
             this.txtBCD.Size = new System.Drawing.Size(232, 22);
             this.txtBCD.StyleController = this.layoutControl1;
             this.txtBCD.TabIndex = 17;
@@ -596,7 +596,7 @@
             this.lueCAT.Name = "lueCAT";
             this.lueCAT.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo),
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Plus, "New", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleLeft, ((System.Drawing.Image)(resources.GetObject("lueCAT.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Plus, "New", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleLeft, ((System.Drawing.Image)(resources.GetObject("lueCAT.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
             this.lueCAT.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID", "ID", 20, DevExpress.Utils.FormatType.None, "", false, DevExpress.Utils.HorzAlignment.Default),
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("CategoryName", "Category")});
@@ -613,7 +613,7 @@
             this.luePNM.Name = "luePNM";
             this.luePNM.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo),
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Plus, "New", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleLeft, ((System.Drawing.Image)(resources.GetObject("luePNM.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject3, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Plus, "New", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleLeft, ((System.Drawing.Image)(resources.GetObject("luePNM.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "", null, null, true)});
             this.luePNM.Properties.NullText = "[Select Product]";
             this.luePNM.Properties.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repCNM});
@@ -718,8 +718,8 @@
             this.lueSUP.Name = "lueSUP";
             this.lueSUP.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo),
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Plus, "New", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleLeft, null, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject4, "", null, null, true),
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Clear, "Clear", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleLeft, null, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject5, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Plus, "New", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleLeft, null, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject3, "", null, null, true),
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Clear, "Clear", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleLeft, null, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject7, "", null, null, true)});
             this.lueSUP.Properties.NullText = "[Select Supplier]";
             this.lueSUP.Properties.View = this.slueSUP;
             this.lueSUP.Size = new System.Drawing.Size(662, 20);
@@ -806,6 +806,42 @@
             this.txtINV.StyleController = this.layoutControl1;
             this.txtINV.TabIndex = 4;
             this.txtINV.TabStop = false;
+            // 
+            // txtBVL
+            // 
+            this.txtBVL.EditValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.txtBVL.Location = new System.Drawing.Point(86, 108);
+            this.txtBVL.Name = "txtBVL";
+            this.txtBVL.Properties.Appearance.Options.UseTextOptions = true;
+            this.txtBVL.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.txtBVL.Properties.EditValueChangedFiringMode = DevExpress.XtraEditors.Controls.EditValueChangedFiringMode.Buffered;
+            this.txtBVL.Properties.Mask.EditMask = "c";
+            this.txtBVL.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+            this.txtBVL.Size = new System.Drawing.Size(107, 20);
+            this.txtBVL.StyleController = this.layoutControl1;
+            this.txtBVL.TabIndex = 11;
+            // 
+            // txtSVL
+            // 
+            this.txtSVL.EditValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.txtSVL.Location = new System.Drawing.Point(271, 108);
+            this.txtSVL.Name = "txtSVL";
+            this.txtSVL.Properties.Appearance.Options.UseTextOptions = true;
+            this.txtSVL.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.txtSVL.Properties.EditValueChangedFiringMode = DevExpress.XtraEditors.Controls.EditValueChangedFiringMode.Buffered;
+            this.txtSVL.Properties.Mask.EditMask = "c2";
+            this.txtSVL.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+            this.txtSVL.Size = new System.Drawing.Size(107, 20);
+            this.txtSVL.StyleController = this.layoutControl1;
+            this.txtSVL.TabIndex = 12;
             // 
             // layoutControlGroup1
             // 
@@ -1045,42 +1081,6 @@
             this.emptySpaceItem2.Size = new System.Drawing.Size(10, 34);
             this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
             // 
-            // txtBVL
-            // 
-            this.txtBVL.EditValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.txtBVL.Location = new System.Drawing.Point(86, 108);
-            this.txtBVL.Name = "txtBVL";
-            this.txtBVL.Properties.Appearance.Options.UseTextOptions = true;
-            this.txtBVL.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.txtBVL.Properties.EditValueChangedFiringMode = DevExpress.XtraEditors.Controls.EditValueChangedFiringMode.Buffered;
-            this.txtBVL.Properties.Mask.EditMask = "c";
-            this.txtBVL.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
-            this.txtBVL.Size = new System.Drawing.Size(107, 20);
-            this.txtBVL.StyleController = this.layoutControl1;
-            this.txtBVL.TabIndex = 11;
-            // 
-            // txtSVL
-            // 
-            this.txtSVL.EditValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.txtSVL.Location = new System.Drawing.Point(271, 108);
-            this.txtSVL.Name = "txtSVL";
-            this.txtSVL.Properties.Appearance.Options.UseTextOptions = true;
-            this.txtSVL.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.txtSVL.Properties.EditValueChangedFiringMode = DevExpress.XtraEditors.Controls.EditValueChangedFiringMode.Buffered;
-            this.txtSVL.Properties.Mask.EditMask = "c";
-            this.txtSVL.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
-            this.txtSVL.Size = new System.Drawing.Size(107, 20);
-            this.txtSVL.StyleController = this.layoutControl1;
-            this.txtSVL.TabIndex = 12;
-            // 
             // frmPurchase
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1122,6 +1122,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dtpPDT.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtpPDT.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtINV.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtBVL.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSVL.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
@@ -1146,8 +1148,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem20)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem21)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtBVL.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtSVL.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }

@@ -12,6 +12,7 @@ using IMS2.Codes;
 using IMS2.Reports;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using DevExpress.XtraReports.UI;
+using DevExpress.XtraGrid.Views.Grid;
 
 namespace IMS2.Forms
 {
@@ -168,7 +169,13 @@ namespace IMS2.Forms
             Product p = new Product();
             ProductDetail d = new ProductDetail();
             int pid = Convert.ToInt32(luePNM.EditValue);
-            pdid = Convert.ToInt32(luePNM.Properties.View.GetFocusedRowCellValue("ProductDetailID"));
+            //pdid = Convert.ToInt32(luePNM.Properties.View.GetFocusedRowCellValue("ProductDetailID"));
+            //GridView view = luePNM.Properties.View;
+            //int rowHandle = luePNM.Properties.GetIndexByKeyValue(luePNM.EditValue);
+            //object row = luePNM.Properties.View.GetRow(rowHandle);
+
+            //pdid = Convert.ToInt32(view.GetRowCellValue(rowHandle, fieldName));
+            //object displayMember = (row as DataRowView).Row["ProductDetailID"];
             p = pc.GetProduct(pid);
             d = pc.GetProductDetail(pdid);
 
@@ -178,7 +185,25 @@ namespace IMS2.Forms
             }
             if (p.Message == null)
             {
-                dt.Rows.Add(pid, p.ProductName, d.BarCode, d.SellingValue, d.BuyingValue, 1, d.SellingValue, d.ID);
+                //dt.Columns.Add("ID", typeof(int));
+                //dt.Columns.Add("ProductName", typeof(string));
+                //dt.Columns.Add("BarCode", typeof(string));
+                //dt.Columns.Add("SellingValue", typeof(double));
+                //dt.Columns.Add("BuyingValue", typeof(double));
+                //dt.Columns.Add("Quantity", typeof(int));
+                //dt.Columns.Add("Amount", typeof(double));
+                //dt.Columns.Add("ProductDetailID", typeof(int));
+                DataRow dr = dt.NewRow();
+                dr["ID"] = pid;
+                dr["ProductName"] = p.ProductName;
+                dr["BarCode"] = d.BarCode;
+                dr["SellingValue"] = d.SellingValue;
+                dr["BuyingValue"] = d.BuyingValue;
+                dr["Quantity"] = 1;
+                dr["Amount"] = d.SellingValue;
+                dr["ProductDetailID"] = d.ID;
+                //dt.Rows.Add(pid, p.ProductName, d.BarCode, d.SellingValue, d.BuyingValue, 1, d.SellingValue, d.ID);
+                dt.Rows.InsertAt(dr, 0);
                 grd.DataSource = dt;
                 grd.Refresh();
 

@@ -205,5 +205,14 @@ namespace IMS2
             MainRibbon.SelectedPage = MainRibbon.MergedRibbon.SelectedPage;
             bClose.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
         }
+
+        private void nChart_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            ucChart uc = new ucChart() { Dock = DockStyle.Fill };
+            LoadControl(uc);
+            MainRibbon.MergeRibbon(uc.ribbonCharts);
+            MainRibbon.SelectedPage = MainRibbon.MergedRibbon.SelectedPage;
+            bClose.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+        }
     }
 }

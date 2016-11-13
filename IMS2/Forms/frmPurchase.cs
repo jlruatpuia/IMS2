@@ -281,7 +281,7 @@ namespace IMS2.Forms
                     }
                 }
                 else
-                    r["Supplier"] = lueSUP.EditValue;
+                r["Supplier"] = lueSUP.EditValue;
                 r["Category"] = lueCAT.EditValue;
                 r["SubCategory"] = cboSCT.Text;
                 r["Company"] = cboCMP.Text;
@@ -317,10 +317,12 @@ namespace IMS2.Forms
                     SupplierContext sx = new SupplierContext();
                     s = sx.DefaultSupplier();
                     r["Supplier"] = s.ID;
+                    
+                    lueSUP.EditValue = s.ID;
                 }
             }
             else
-                r["Supplier"] = lueSUP.EditValue;
+            r["Supplier"] = lueSUP.EditValue;
             r["Category"] = lueCAT.EditValue;
             r["SubCategory"] = cboSCT.Text;
             r["Company"] = cboCMP.Text;

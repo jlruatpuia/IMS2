@@ -66,18 +66,6 @@ namespace IMS2.Codes
             return sc;
         }
 
-        //public ServerToClient QuickSaleReceipt(string InvoiceNo)
-        //{
-        //    ServerToClient sc = new ServerToClient();
-        //    MySqlCommand cmd = new MySqlCommand("SELECT sale.InvoiceNo, sale.SellDate, product.ProductName, product.PackageSize, saledetail.SellingValue * saledetail.Quantity AS Amount, saledetail.Quantity FROM sale INNER JOIN saledetail ON saledetail.InvoiceNo = sale.InvoiceNo INNER JOIN product ON saledetail.Product = product.ID WHERE sale.InvoiceNo = '" + InvoiceNo + "'", cm);
-        //    MySqlDataAdapter da = new MySqlDataAdapter(cmd);
-        //    DataSet ds = new DataSet();
-        //    da.Fill(ds);
-        //    sc.Count = ds.Tables[0].Rows.Count;
-        //    sc.DT = ds.Tables[0];
-        //    return sc;
-        //}
-
         public ServerToClient GetSales(string InvoiceNo)
         {
             ServerToClient sc = new ServerToClient();
@@ -124,8 +112,7 @@ namespace IMS2.Codes
         {
             ServerToClient sc = new ServerToClient();
             MySqlCommand cmd = new MySqlCommand("SELECT sale.InvoiceNo, sale.SellDate, CONCAT(product.Company, ' ', product.ProductName) AS ProductName, saledetail.SellingValue * saledetail.Quantity AS Amount, saledetail.Quantity FROM sale INNER JOIN saledetail ON saledetail.InvoiceNo = sale.InvoiceNo INNER JOIN product ON saledetail.Product = product.ID WHERE sale.InvoiceNo = '" + InvoiceNo + "'", cm);
-
-            //MySqlCommand cmd = new MySqlCommand("SELECT CONCAT(product.Company, ' ', product.ProductName) AS productname, saledetail.Quantity, saledetail.SellingValue, sale.Amount, sale.Discount, saledetail.InvoiceNo FROM product INNER JOIN(saledetail INNER JOIN sale ON saledetail.InvoiceNo = sale.InvoiceNo) ON saledetail.Product =  product.ID WHERE sale.InvoiceNo = '" + InvoiceNo + "'", cm);
+            
             MySqlDataAdapter da = new MySqlDataAdapter(cmd);
             DataSet ds = new DataSet();
             da.Fill(ds);
